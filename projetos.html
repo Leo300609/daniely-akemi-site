@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Projetos · Daniely Akemi Arquitetura</title>
+<meta name="description" content="Portfólio de projetos residenciais e comerciais do escritório Daniely Akemi Arquitetura &amp; Interiores.">
+<link rel="icon" href="img/logo.png">
+<script>
+  /* A página abre sempre coberta pela cortina; o JS só faz a descida. */
+  document.documentElement.classList.add('js');
+  document.documentElement.setAttribute('data-yknav', '1');
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Questrial&amp;family=Allura&amp;display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<div class="page" style="min-height:100vh">
+
+  <div class="curtain" data-curtain>
+    <div class="curtain-name" data-curtain-in>Daniely Akemi</div>
+    <div class="curtain-lab" data-curtain-lab>ARQUITETURA &amp; INTERIORES</div>
+  </div>
+
+  <header class="pnav" id="pnav" data-tab="residencial">
+    <a class="pnav-logo" href="index.html"><img src="img/logo.png" alt="Daniely Akemi Arquitetura &amp; Interiores"></a>
+    <div class="pill" role="tablist">
+      <span class="pill-thumb"></span>
+      <button data-tab="residencial" role="tab">RESIDENCIAL</button>
+      <button data-tab="comercial" role="tab">COMERCIAL</button>
+    </div>
+    <a class="pnav-contact" href="index.html#contato">CONTATO</a>
+  </header>
+
+  <main id="app"></main>
+
+  <footer class="pfoot">
+    <span>© Daniely Akemi Arquitetura</span>
+    <span>Rua Paraná, 217 · Suzano – SP</span>
+    <div class="pfoot-dev">
+      <a class="devby light" href="#" aria-label="Desenvolvido por Leo Designs">
+        <span>DESENVOLVIDO POR</span>
+        <span class="devby-tag">
+          <svg width="26" height="26" viewBox="0 0 26 26" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square" aria-hidden="true"><rect x="1" y="1" width="24" height="24" rx="6"></rect><path d="M7 7v12h5"></path><path d="M14 7h2.5a5 5 0 0 1 0 10H14z"></path></svg>
+          <b>LEO DESIGNS</b>
+        </span>
+      </a>
+    </div>
+  </footer>
+
+  <div class="lb" id="lb" role="dialog" aria-modal="true" aria-label="Galeria do projeto" hidden></div>
+</div>
+<script src="js/yk.js"></script>
+<script src="js/projetos.js"></script>
+</body>
+</html>
