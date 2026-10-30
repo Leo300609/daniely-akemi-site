@@ -286,6 +286,20 @@
     $('#t-next').addEventListener('click', () => { setTest(state.t + 1); restartTestTimer(); });
     restartTestTimer();
 
+    // menu mobile
+    const root = document.documentElement, burger = $('#burger'), menu = $('#menu');
+    const setMenu = open => {
+      root.classList.toggle('menu-open', open);
+      root.style.overflow = open ? 'hidden' : '';
+      burger.setAttribute('aria-expanded', String(open));
+      menu.setAttribute('aria-hidden', String(!open));
+    };
+    burger.addEventListener('click', () => setMenu(!root.classList.contains('menu-open')));
+    $('#menu-close').addEventListener('click', () => setMenu(false));
+    menu.addEventListener('click', e => { if (e.target.closest('a')) setMenu(false); });
+    addEventListener('keydown', e => { if (e.key === 'Escape' && root.classList.contains('menu-open')) setMenu(false); });
+    addEventListener('resize', () => { if (innerWidth >= 1080 && root.classList.contains('menu-open')) setMenu(false); });
+
     $('#lb-close').addEventListener('click', closeLb);
     $('#lb-prev').addEventListener('click', () => openLb(state.lb - 1));
     $('#lb-next').addEventListener('click', () => openLb(state.lb + 1));

@@ -12,7 +12,8 @@
 </script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Questrial&amp;family=Allura&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Questrial&amp;family=Allura&amp;display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+<noscript><link href="https://fonts.googleapis.com/css2?family=Questrial&amp;family=Allura&amp;display=swap" rel="stylesheet"></noscript>
 <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
@@ -41,8 +42,27 @@
       <span class="lang"><span>PT</span><span class="lang-sep">/</span><a href="https://www.danielyakemiarquitetura.com.br/en">EN</a></span>
       <span class="nav-sep"></span>
       <a class="nav-cta" href="#contato" data-mag>CONTATO</a>
+      <button class="nav-burger" id="burger" aria-label="Abrir menu" aria-expanded="false" aria-controls="menu"><i></i><i></i></button>
     </div>
   </header>
+
+  <!-- MENU MOBILE -->
+  <div class="menu" id="menu" aria-hidden="true">
+    <button class="menu-close" id="menu-close">FECHAR ✕</button>
+    <nav class="menu-links" aria-label="Menu">
+      <a href="#topo">Início</a>
+      <a href="#sobre">Sobre</a>
+      <a href="projetos.html#residencial">Residencial</a>
+      <a href="projetos.html#comercial">Comercial</a>
+      <a href="#vm">Visual Merchandising</a>
+      <a href="#depoimentos">Depoimentos</a>
+      <a href="#contato">Contato</a>
+    </nav>
+    <div class="menu-foot">
+      <a href="https://wa.me/5511956550749">WhatsApp (11) 95655.0749</a>
+      <a href="mailto:arq.danielyakemi@outlook.com">arq.danielyakemi@outlook.com</a>
+    </div>
+  </div>
 
   <main>
   <!-- HERO -->
@@ -299,7 +319,7 @@
   </footer>
 
   <!-- WhatsApp -->
-  <a class="wa" href="https://wa.me/5511956550749" data-mag data-cursor="Olá">Fale conosco <span>↗</span></a>
+  <a class="wa" href="https://wa.me/5511956550749" data-mag data-cursor="Olá" aria-label="Fale conosco no WhatsApp"><b>Fale conosco</b> <span>↗</span></a>
 
   <!-- LIGHTBOX -->
   <div class="lb-home" id="lb" role="dialog" aria-modal="true" aria-label="Galeria">
