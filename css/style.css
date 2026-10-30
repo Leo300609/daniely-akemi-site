@@ -46,7 +46,6 @@
 /* CSS crítico: pinta o fundo da cortina antes do JS (evita flash branco entre páginas) */
 html[data-yknav], html[data-yknav] body { background: var(--ink) !important; }
 html[data-yknav] body::before { content: ""; position: fixed; inset: 0; background: var(--ink); z-index: 2147483647; }
-html[data-yknav] [data-pre] { display: none !important; }
 
 html, body { margin: 0; background: var(--paper); color: var(--ink); -webkit-font-smoothing: antialiased; }
 body { font-family: var(--font); }
@@ -121,27 +120,6 @@ figure { margin: 0; }
 /* ============================================================
    HOME
    ============================================================ */
-
-/* Preloader */
-.pre {
-  position: fixed; inset: 0; z-index: 100; background: var(--paper);
-  display: flex; align-items: center; justify-content: center; clip-path: inset(0 0 0 0);
-}
-.pre-box { position: relative; width: min(70vw, 340px); aspect-ratio: 162/87; display: flex; align-items: center; justify-content: center; }
-.pre-frame { position: absolute; inset: -14px; width: calc(100% + 28px); height: calc(100% + 28px); overflow: visible; }
-.pre-frame rect { fill: none; stroke: var(--bronze); stroke-width: 1; stroke-dasharray: 400; stroke-dashoffset: 400; }
-.pre-logo {
-  width: 100%; mix-blend-mode: multiply; opacity: 0; transform: translateY(12px) scale(.96);
-  transition: opacity 1s ease, transform 1.2s var(--ease-reveal);
-}
-.pre-foot {
-  position: absolute; left: clamp(20px, 4vw, 56px); right: clamp(20px, 4vw, 56px); bottom: clamp(20px, 4vw, 48px);
-  display: flex; justify-content: space-between; align-items: flex-end; gap: 24px;
-  font-size: 12px; letter-spacing: .3em; color: var(--muted-2);
-}
-.pre-num { font-size: clamp(48px, 7vw, 96px); letter-spacing: -.02em; color: var(--ink); line-height: .8; }
-.pre-bar { position: absolute; left: 0; right: 0; bottom: 0; height: 2px; background: var(--sand); }
-.pre-bar div { height: 100%; background: var(--bronze); transform: scaleX(0); transform-origin: left; }
 
 /* Cursor customizado (só ponteiro fino) */
 .cur-dot { position: fixed; left: 0; top: 0; width: 6px; height: 6px; margin: -3px 0 0 -3px; border-radius: 50%; background: var(--brown); z-index: 90; pointer-events: none; opacity: 0; }

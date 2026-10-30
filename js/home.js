@@ -111,47 +111,36 @@
     }
   }
 
-  function exitPre() {
+  // Revela o hero (títulos por linha, cards, zoom da imagem de fundo).
+  function revealHero() {
+    if (exited) return;
     exited = true; clearTimeout(fallback);
-    const pre = $('[data-pre]');
-    pre.style.transition = 'clip-path 1.2s cubic-bezier(.76,0,.24,1)';
-    pre.style.clipPath = 'inset(0 0 100% 0)';
-    document.documentElement.style.overflow = '';
-    setTimeout(() => {
-      $$('[data-hero]').forEach(show);
-      const img = $('[data-heroimg]');
-      img.style.transition = 'transform 2.8s cubic-bezier(.16,1,.3,1)';
-      img.style.transform = 'scale(1)';
-    }, 300);
-    setTimeout(() => { pre.style.display = 'none'; }, 1300);
+    $$('[data-hero]').forEach(show);
+    const img = $('[data-heroimg]');
+    img.style.transition = 'transform 2.8s cubic-bezier(.16,1,.3,1)';
+    img.style.transform = 'scale(1)';
   }
 
-  function initPreloader() {
-    const num = $('[data-pre-num]'), rect = $('[data-pre-rect]'), logo = $('[data-pre-logo]'), bar = $('[data-pre-bar]');
-    document.documentElement.style.overflow = 'hidden';
+  function initEntry() {
     YK.bindPageLinks(/^projetos\.html/, 'PORTFÓLIO');
-    let fromNav = YK.arrivedFromNav();
-    if (fromNav || document.documentElement.hasAttribute('data-yknav')) {
-      fromNav = true;
-      $('[data-pre]').style.display = 'none';
+    const fromNav = YK.arrivedFromNav() || document.documentElement.hasAttribute('data-yknav');
+    const img = $('[data-heroimg]');
+    // espera a imagem do hero (máx. 1,5s) para a revelação não acontecer sobre fundo vazio
+    const ready = new Promise(res => {
+      if (img.complete) return res();
+      img.addEventListener('load', res, { once: true });
+      img.addEventListener('error', res, { once: true });
+    });
+    fallback = setTimeout(revealHero, 1500);
+    if (fromNav) {
       $('[data-curtain]').style.clipPath = 'inset(0% 0 0 0)';
       YK.hideCurtainText();
       document.documentElement.removeAttribute('data-yknav');
-      setTimeout(() => { if (!exited) exitPre(); YK.curtainOut(); }, 150);
+      ready.then(() => setTimeout(() => { revealHero(); YK.curtainOut(); }, 150));
+    } else {
+      ready.then(() => setTimeout(revealHero, 100));
     }
     addEventListener('pageshow', e => { if (e.persisted) YK.curtainOut(); });
-    const t0 = performance.now(), D = fromNav ? 1 : 2200;
-    const step = now => {
-      if (dead) return;
-      const p = Math.min(1, (now - t0) / D), e = 1 - Math.pow(1 - p, 3);
-      num.textContent = String(Math.round(e * 100)).padStart(3, '0');
-      rect.style.strokeDashoffset = String(400 * (1 - e));
-      bar.style.transform = `scaleX(${e})`;
-      if (p > .3) { logo.style.opacity = 1; logo.style.transform = 'none'; }
-      if (p < 1) requestAnimationFrame(step); else setTimeout(() => { if (!exited) exitPre(); }, 300);
-    };
-    requestAnimationFrame(step);
-    fallback = setTimeout(() => { if (!exited) exitPre(); }, 3200);
   }
 
   function initReveals() {
@@ -233,8 +222,7 @@
     $('#lb-img').alt = RES[state.lb][1];
     $('#lb-title').textContent = `${pad2(state.lb + 1)} / ${pad2(RES.length)} — ${RES[state.lb][1]}`;
     $('#lb').classList.add('open');
-    if (first) document.documentElement.style.overflow = 'hidden';
-  }
+    if (first) document.documentElement.style.overflow = 'hidden';  }
   function closeLb() {
     state.lb = -1; $('#lb').classList.remove('open');
     if (exited) document.documentElement.style.overflow = '';
@@ -396,7 +384,7 @@
 
   /* ---------- Init ---------- */
   renderLists();
-  initPreloader();
+  initEntry();
   initReveals();
   initPointer();
   initTrack();
